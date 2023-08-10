@@ -1,4 +1,5 @@
 import os
+import time
 
 # Update the next two lines
 model_path = r"//home/onil/Documents/oobabooga_linux/text-generation-webui/models/TheBloke_Llama-2-13B-chat-GPTQ_gptq-4bit-32g-actorder_True"
@@ -116,12 +117,14 @@ def run_mmlu():
 
 
 def main():
+    tik = time.time()
 
     run_arc_challenge()
     run_hellaswag()
     run_truthfulqa()
     run_mmlu()
     
+    print('Completed in:', time.strftime('%H:%M:%S', time.time()- tik ) )
     
    
     
