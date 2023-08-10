@@ -10,6 +10,7 @@ Linux
 3. Update the activate_env.sh with the path to the webui
 4. Open a terminal in this directory and run 
 ```bash
+chmod +x activate_env.sh
 source activate_env.sh
 ```
 5. Run the installation of the lm-evaluation-harness
@@ -18,8 +19,14 @@ git clone https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
 pip install -e .
 ```
-6. Update the run_eval.py script with model path variables and run the python *run_eval.py* script
+6. Update the *run_eval.py* script with model path variables
 
 ```bash
-python run_eval.py
+chmod +x run_script.sh
+./run_script.sh
 ```
+
+## TODO
+1. Make process easier 
+2. Add a file defining the variables
+3. Add results from my own testing
