@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-lm-evaluation-harness/*
+lm-evaluation-harness/
 
 # C extensions
 *.so
