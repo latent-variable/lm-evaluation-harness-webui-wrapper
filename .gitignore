@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 
 lm-evaluation-harness/
+lm_cache/
 
 # C extensions
 *.so
