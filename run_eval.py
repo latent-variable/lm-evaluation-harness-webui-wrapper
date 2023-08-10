@@ -8,8 +8,8 @@ model_name = r"gptq_model-4bit-32g.safetensors"
 script_path = r"lm-evaluation-harness/main.py"
 model_type = r"--model hf-causal-experimental"
 
-# limit = ""
-limit = "--limit=5"
+limit = ""
+# limit = "--limit=5"
 
 def run_harness(task_name, tasks, few_shot):
 
