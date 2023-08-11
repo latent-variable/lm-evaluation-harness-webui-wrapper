@@ -1,1 +1,1 @@
-cmd /k shortcut.bat
+cmd /k env.bat

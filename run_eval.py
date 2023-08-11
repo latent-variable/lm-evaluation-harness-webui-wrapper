@@ -1,29 +1,32 @@
 import os
 import time
+import json
 
-# Update the next two lines
-model_path = r"//home/onil/Documents/oobabooga_linux/text-generation-webui/models/TheBloke_Llama-2-13B-chat-GPTQ_gptq-4bit-32g-actorder_True"
-model_name = r"gptq_model-4bit-32g.safetensors"
+with open('model.json', 'r') as file:
+  parameters = json.load(file)
+
+model_path = os.path.dirname(parameters['model_path'])
+model_name = os.path.basename(parameters['model_path'])
 
 # Leave me
 script_path = r"lm-evaluation-harness/main.py"
-model_type = r"--model hf-causal-experimental"
+model_type = r"--model hf"
 
 limit = ""
 # limit = "--limit=5"
 
 def run_harness(task_name, tasks, few_shot):
 
-    mname = model_name.split(".")[0]
+    mname = os.path.basename(model_path)
     output_path = f"--output_path output/{mname}-{task_name}.json"
 
-    model_args = f"--model_args pretrained={model_path},quantized={model_name},gptq_use_triton=True"
+    model_args = f"--model_args pretrained={model_path},gptq={model_name},gptq_use_triton=False"
     
     print(f'Executing task {task_name}, with few_shot {few_shot}')
 
     cmd = f"python {script_path} {model_type}  {model_args} {tasks} {few_shot} {output_path} {limit}"
     
-    
+    print(cmd)
     os.system(cmd)
     
 
@@ -43,7 +46,7 @@ def run_hellaswag():
 
 
 def run_truthfulqa():
-    task_name = 'truthfulqa_mc'
+    task_name = 'truthfulqa_mc1'
     tasks = f"--tasks {task_name}"
     few_shot = "--num_fewshot 0"
     run_harness(task_name, tasks, few_shot)
@@ -108,10 +111,11 @@ def run_mmlu():
                      'hendrycksTest-sociology',
                      'hendrycksTest-us_foreign_policy',
                      'hendrycksTest-virology',
-                     'hendrycksTest-world_religions' ])
+                     'hendrycksTest-world_religions'
+                    ])
 
     
-    tasks = f"--tasks {task_list} --limit=5"
+    tasks = f"--tasks {task_list} "
     few_shot = "--num_fewshot 5"
     run_harness(task_name, tasks, few_shot)
 
@@ -122,9 +126,12 @@ def main():
     run_arc_challenge()
     run_hellaswag()
     run_truthfulqa()
-    run_mmlu()
+    # run_mmlu()
     
-    print('Completed in:', time.strftime('%H:%M:%S', time.time()- tik ) )
+    elapsed_time_seconds = time.time() - tik
+    elapsed_time_struct = time.gmtime(elapsed_time_seconds)
+    formatted_time = time.strftime('%H:%M:%S', elapsed_time_struct)
+    print('Completed in:', formatted_time)
     
    
     
