@@ -3,6 +3,7 @@ import time
 import json
 import platform
 
+from metrics import get_metrics
 
 
 with open('model.json', 'r') as file:
@@ -10,29 +11,33 @@ with open('model.json', 'r') as file:
 
 model_path = os.path.dirname(parameters['model_path'])
 model_name = os.path.basename(parameters['model_path'])
-
+mname = os.path.basename(model_path)
 # Leave me
 script_path = r"lm-evaluation-harness/main.py"
 
 if platform.system() == 'Windows':
     print('Windows')
     model_type = r"--model hf"
+    model_spec = r'gptq'
+    use_triton = "False"
 elif platform.system() == 'Linux':
     print(' Linux')
     model_type = r"--model hf-causal-experimental"
+    model_spec = r'quantized'
+    use_triton = "True"
 else:
     print('Unknown OS')
-    return -1
+    exit(-1)
 
 limit = ""
-# limit = "--limit=5"
+limit = "--limit=2"
 
 def run_harness(task_name, tasks, few_shot):
 
-    mname = os.path.basename(model_path)
+    
     output_path = f"--output_path output/{mname}-{task_name}.json"
 
-    model_args = f"--model_args pretrained={model_path},gptq={model_name},gptq_use_triton=False"
+    model_args = f"--model_args pretrained={model_path},{model_spec}={model_name},gptq_use_triton={use_triton}"
     
     print(f'Executing task {task_name}, with few_shot {few_shot}')
 
@@ -58,7 +63,7 @@ def run_hellaswag():
 
 
 def run_truthfulqa():
-    task_name = 'truthfulqa_mc1'
+    task_name = 'truthfulqa_mc'
     tasks = f"--tasks {task_name}"
     few_shot = "--num_fewshot 0"
     run_harness(task_name, tasks, few_shot)
@@ -135,10 +140,14 @@ def run_mmlu():
 def main():
     tik = time.time()
 
+    #run each benchmark
     run_arc_challenge()
     run_hellaswag()
     run_truthfulqa()
-    # run_mmlu()
+    run_mmlu()
+
+    # Get final results 
+    get_metrics(mname)
     
     elapsed_time_seconds = time.time() - tik
     elapsed_time_struct = time.gmtime(elapsed_time_seconds)
