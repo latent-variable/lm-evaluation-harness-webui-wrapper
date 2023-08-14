@@ -15,11 +15,10 @@ Linux & Windows
 chmod +x activate_env.sh
 source activate_env.sh
 ```
-5. Proceed with the installation of lm-evaluation-harness big refactor branch
+5. Proceed with the installation of lm-evaluation-harness 
 ```bash
 git clone https://github.com/EleutherAI/lm-evaluation-harness
 cd lm-evaluation-harness
-git checkout big-refactor
 pip install -e .
 ```
 6. Update the *model.json* file model path

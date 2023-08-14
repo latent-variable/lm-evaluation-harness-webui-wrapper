@@ -1,6 +1,9 @@
 import os
 import time
 import json
+import platform
+
+
 
 with open('model.json', 'r') as file:
   parameters = json.load(file)
@@ -10,7 +13,16 @@ model_name = os.path.basename(parameters['model_path'])
 
 # Leave me
 script_path = r"lm-evaluation-harness/main.py"
-model_type = r"--model hf"
+
+if platform.system() == 'Windows':
+    print('Windows')
+    model_type = r"--model hf"
+elif platform.system() == 'Linux':
+    print(' Linux')
+    model_type = r"--model hf-causal-experimental"
+else:
+    print('Unknown OS')
+    return -1
 
 limit = ""
 # limit = "--limit=5"
