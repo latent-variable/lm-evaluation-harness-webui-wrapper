@@ -8,11 +8,12 @@ This wrapper leverages both [oobabooga text-generation-webui](https://github.com
 
 | Model Name              | Bits    |     GS    | ARC         | Act Order |
 |-------------------------|---------|-----------|-------------|-----------|
-| OpenOrca Platypus2 13B  | 16-bit  |     NA    | 62.88%      |    No     |
+| OpenOrca Platypus2 13B  | 16-bit  |     NA    | 62.88%      |    NA     |
 | OpenOrca Platypus2 13B  | 8-bit   |   None    | 62.88%      |   Yes     |
 | OpenOrca Platypus2 13B  | 4-bit   |     32    | 62.28%      |   Yes     |
 | OpenOrca Platypus2 13B  | 4-bit   |    128    | 62.62%      |    No     |
 
+Note the 4bit 32GS model reports lower acc_norm then the 4bit 128GS but higher acc of 58.02% vs 57.59%
 
 # Supported OS
 Linux & Windows
@@ -61,4 +62,4 @@ pip install -e .
 ## TODO
 - Make the process more user-friendly.
 - Add a file for defining variables.
-- Include results from personal testing.
+- Add results with 3bit models
