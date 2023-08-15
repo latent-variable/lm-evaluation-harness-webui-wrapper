@@ -30,7 +30,7 @@ else:
     exit(-1)
 
 limit = ""
-limit = "--limit=2"
+# limit = "--limit=2"
 
 def run_harness(task_name, tasks, few_shot):
 
@@ -141,10 +141,12 @@ def main():
     tik = time.time()
 
     #run each benchmark
+    
     run_arc_challenge()
-    run_hellaswag()
-    run_truthfulqa()
-    run_mmlu()
+    # run_mmlu()
+    # run_hellaswag()
+    # run_truthfulqa()
+    
 
     # Get final results 
     get_metrics(mname)

@@ -3,6 +3,15 @@ Have you ever pondered how quantization might affect model performance, or what 
 
 This wrapper leverages both [oobabooga text-generation-webui](https://github.com/oobabooga/text-generation-webui) and [EleutherAI lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) to evaluate GPTQ version models on various benchmarks including ARC, HellaSwag, MMLU, and TruthfulQA, akin to the [Open LLM Leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard)
 
+# Test Results 
+| Model Name              | Bits    |     GS    | ARC: 25-shot| Act Order |
+|-------------------------|---------|-----------|-------------|-----------|
+| OpenOrca Platypus2 13B  | 16-bit  |     NA    | 62.88%      |  No       |
+| OpenOrca Platypus2 13B  | 8-bit   |   None    | 58.62%      | Yes       |
+| OpenOrca Platypus2 13B  | 4-bit   |     32    | 58.02%      | Yes       |
+| OpenOrca Platypus2 13B  | 4-bit   |    128    | 57.60%      | No        |
+
+
 # Supported OS
 Linux & Windows
 

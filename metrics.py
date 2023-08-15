@@ -1,5 +1,6 @@
 
 import json
+import os
 
 # Load the JSON file
 def load_data(file_path):
@@ -41,19 +42,21 @@ def extract_truthfulqa_score(file_path):
 def get_metrics(mname='TheBloke_OpenOrca-Platypus2-13B-GPTQ_gptq-4bit-32g-actorder_True'):
 
 
-    mmlu_file_path = f'output/{mname}-MMLU.json'
-    extract_mmlu_score(mmlu_file_path)
-
+    
 
     acc_file_path = f'output/{mname}-arc_challenge.json'
     extract_arc_challenge_score(acc_file_path)
 
-    hellaswag_file_path = f'output/{mname}-hellaswag.json'
-    extract_hellaswag_score(hellaswag_file_path)
+    # mmlu_file_path = f'output/{mname}-MMLU.json'
+    # extract_mmlu_score(mmlu_file_path)
 
 
-    truthfulqa_mc_file_path = f'output/{mname}-truthfulqa_mc.json'
-    extract_truthfulqa_score(truthfulqa_mc_file_path)
+    # hellaswag_file_path = f'output/{mname}-hellaswag.json'
+    # extract_hellaswag_score(hellaswag_file_path)
+
+
+    # truthfulqa_mc_file_path = f'output/{mname}-truthfulqa_mc.json'
+    # extract_truthfulqa_score(truthfulqa_mc_file_path)
 
 if __name__=="__main__":
 
