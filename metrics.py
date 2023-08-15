@@ -21,17 +21,17 @@ def get_avg_score(data, metric='acc'):
 
 def extract_mmlu_score(file_path):
     data = load_data(file_path)
-    score = get_avg_score(data, metric='acc')
+    score = get_avg_score(data, metric='acc_norm')
     print(f'MMLU acc score: {score}')
 
 def extract_arc_challenge_score(file_path):
     data = load_data(file_path)
-    score = get_avg_score(data, metric='acc')
+    score = get_avg_score(data, metric='acc_norm')
     print(f'ARC challenge acc score: {score}')
 
 def extract_hellaswag_score(file_path):
     data = load_data(file_path)
-    score = get_avg_score(data, metric='acc')
+    score = get_avg_score(data, metric='acc_norm')
     print(f'Hellaswag acc score: {score}')
 
 def extract_truthfulqa_score(file_path):
